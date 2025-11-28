@@ -1,23 +1,23 @@
 import { FaStar } from "react-icons/fa";
 import { FaCodeBranch } from "react-icons/fa";
 
-//title, subtitle, desciption, starred, branches
-
 export type RepositoryItemProps = {
-    title: string
-    subtitle: string
-    description: string
-    starred: number
-    branches: number
+    fullName    : string
+    description?: string
+    starred     : number
+    branches    : number
 }
 
-function RepositoryItem({title, subtitle, description, starred, branches} : RepositoryItemProps) {
+function RepositoryItem({fullName, description, starred, branches} : RepositoryItemProps) {
+
+    const [owner, repo] = fullName.split("/")
+
     return(
          <div className="w-full h-25">
             <div className="flex gap-2">
-                <h2 className="font-light text-lg">{title}</h2>
-                <h2 className="text-lg">/</h2>
-                <h2 className="font-bold text-lg text-blue-500">{subtitle}</h2>
+                <h2 className="font-light text-lg">{owner}</h2>
+                <p className="text-lg">/</p>
+                <h2 className="font-bold text-lg text-blue-500">{repo}</h2>
             </div>
             <div>
                 <p className="text-[#989898] text-sm">{description}</p>

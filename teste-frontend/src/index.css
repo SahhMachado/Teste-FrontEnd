@@ -4,3 +4,12 @@
 :root {
   font-family: 'Roboto', system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
+
+.scroll-hidden {
+  scrollbar-width: none;      
+  -ms-overflow-style: none;  
+}
+
+.scroll-hidden::-webkit-scrollbar {
+  display: none;              
+}
