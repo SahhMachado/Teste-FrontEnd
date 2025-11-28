@@ -15,7 +15,7 @@ type ProfileProps = {
 
 function Profile({nome, bio, links =[]} : ProfileProps) { 
     return (
-        <div className="ml-80 mt-20">
+        <div className="ml-80 mr-25">
             <div className="max-w-50 flex flex-wrap text-center justify-center">
                 <ProfileAvatar src={ImgPerfil} size={150} />
                 <h2 className="mt-5 font-bold text-3xl">{nome}</h2>
