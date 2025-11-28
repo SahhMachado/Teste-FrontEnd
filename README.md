@@ -17,8 +17,8 @@ Durante o projeto, foram encontratos os seguintes desafios:
 Para funcionar corretamente, precisa instalar o Node.js versão 22.20.0 ou superior e o npm ou yarn.
 Siga os seguintes passos:
 
-1 - Clone este repositório: git clone https://github.com/SahhMachado/Teste-FrontEnd.git
-2 - Acesse a pasta do projeto: cd teste-frontend
-3 - Instale as dependências: npm install ou yarn install
-4 - Execute-o: npm run dev ou yarn dev
-5 - Acesse no navegador (o terminal vai apresentar o link)
+1 - Clone este repositório: git clone https://github.com/SahhMachado/Teste-FrontEnd.git<br>
+2 - Acesse a pasta do projeto: cd teste-frontend <br>
+3 - Instale as dependências: npm install ou yarn install <br>
+4 - Execute-o: npm run dev ou yarn dev <br>
+5 - Acesse no navegador (o terminal vai apresentar o link) <br>
