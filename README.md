@@ -22,3 +22,6 @@ Siga os seguintes passos:
 3 - Instale as dependências: npm install ou yarn install <br>
 4 - Execute-o: npm run dev ou yarn dev <br>
 5 - Acesse no navegador (o terminal vai apresentar o link) <br>
+
+# Link do Site
+- https://teste-frontend-magazord.netlify.app
