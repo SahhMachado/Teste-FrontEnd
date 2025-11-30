@@ -14,6 +14,7 @@ function RepositoryList({ repoItems }: RepositoryListProps) {
           description={item.description}
           starred={item.starred}
           branches={item.branches}
+          link={item.link}
         />
       ))}
     </div>

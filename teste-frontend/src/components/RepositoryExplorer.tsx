@@ -87,7 +87,8 @@ function RepositoryExplorer() {
                         fullName: repo.full_name,
                         description: repo.description ?? "",
                         starred: repo.stargazers_count,
-                        branches: repo.forks_count
+                        branches: repo.forks_count,
+                        link: repo.html_url
                     }))}
                 />
             </div>
