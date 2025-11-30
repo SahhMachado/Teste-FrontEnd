@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { FaAngleDown } from "react-icons/fa"
+import { FaChevronDown } from "react-icons/fa6";
 
 type FilterItem = {
   label: string
@@ -27,16 +27,16 @@ export function FilterDropdown({ title, items }: FilterDropdownProps) {
   }
 
   return (
-    <div className="relative inline-block">
+    <div className="relative inline-block z-10 lg:mt-0 md:mt-0 mt-[10%]">
       <button
         onClick={() => setOpen(!open)}
         className="relative inline-flex items-center rounded-full 
-                   bg-[#0B67D1] px-4 py-2 pl-10 text-white 
-                   hover:bg-[#095bb8] transition ml-5"
+                    bg-linear-to-r from-[#0056A6] to-[#0587FF]
+                    px-[16%] py-[4%] pl-10 text-white lg:mr-[2vw] md:mr-[3.5vw]
+                    mr-[8vw] ml-[8%]"
       >
-        <FaAngleDown
-          size={18}
-          className={`absolute left-4 transition-transform ${
+        <FaChevronDown
+          className={`absolute lg:w-[0.7vw] md:w-[1.8vw] w-[3vw] left-4 transition-transform ${
             open ? "rotate-180" : ""
           }`}
         />

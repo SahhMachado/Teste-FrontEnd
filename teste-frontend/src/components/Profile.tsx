@@ -1,47 +1,23 @@
 import ProfileAvatar from "./ProfileAvatar"
-import Icon1 from "../assets/icon1.svg"
-import Icon2 from "../assets/icon2.svg"
-import Icon3 from "../assets/icon3.svg"
-import Icon4 from "../assets/icon4.svg"
 import { useGithubProfile } from "../hooks/useGithubProfile"
+import MoreProfileInfo from "./MoreProfileInfo"
+import ProfileInfo from "./ProfileInfo"
 
 function Profile() { 
-    const { perfil, error } = useGithubProfile("SahhMachado")
+    const { perfil } = useGithubProfile("SahhMachado")
     if (!perfil) return null // ou loader
-
     return (
-        <div className="ml-80 mr-25">
-            <div className="max-w-50 flex flex-wrap text-center justify-center">
-                <ProfileAvatar src={perfil.avatar_url} size={150} />
-                <h2 className="mt-5 font-bold text-3xl">{perfil.name}</h2>
-                <p className="mb-10 text-[#989898]">{perfil.bio}</p>
+        <div className="lg:ml-[15%] lg:w-[15%] md:w-[30%] md:ml-[3%]">
+            <div className="max-w-full flex flex-wrap text-center justify-center">
+                <ProfileAvatar src={perfil.avatar_url} />
+                <h2 className="lg:mt-[10%] md:mt-[10%] mt-[5%] font-bold text-[2.5vh] min-w-screen">{perfil.name}</h2>
+                <p className="lg:mb-[15%] md:mb-[15%] mb-[5%] text-[1.5vh] text-[#989898]">{perfil.bio}</p>
             </div>
-            <div className="mb-2 max-w-70 text-blue-500 flex flex-wrap">
-                {perfil.company && (
-                    <>
-                        <img className="mr-2" src={Icon1} alt="" />
-                        <a href="#">{perfil.company}</a>
-                    </>
-                )}
-                {perfil.location && (
-                    <>
-                        <img className="mr-2" src={Icon2} alt="" />
-                        <a href="#">{perfil.location}</a>
-                    </>
-                )}
-                {perfil.blog && (
-                    <>
-                        <img className="mr-2" src={Icon3} alt="" />
-                        <a href="#">{perfil.blog}</a>
-                    </>
-                )}
-                {perfil.twitter_username && (
-                    <>
-                        <img className="mr-2" src={Icon4} alt="" />
-                        <a href="#">{perfil.twitter_username}</a>
-                    </>
-                )}
-                
+            <div className="lg:block md:block hidden">
+                <ProfileInfo />
+            </div>
+            <div className="lg:hidden md:hidden">
+                <MoreProfileInfo />
             </div>
         </div>
     )
