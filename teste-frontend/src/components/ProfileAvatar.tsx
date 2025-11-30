@@ -1,4 +1,4 @@
-import { FaSmile } from "react-icons/fa";
+import { FaSmile } from "react-icons/fa"
 
 type ProfileAvatarProps = {
     src: string

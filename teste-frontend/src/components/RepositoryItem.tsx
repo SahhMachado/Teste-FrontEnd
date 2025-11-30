@@ -14,7 +14,7 @@ function RepositoryItem({fullName, description, starred, branches, link} : Repos
     const [owner, repo] = fullName.split("/")
 
     return(
-         <a href={link} target="_blank" className="border-b border-gray-200 lg:h-[10%] h-[30%]">
+         <a href={link} target="_blank" className="inline-block lg:border-0 border-b border-gray-200 mb-10 lg:h-[10%] h-[30%]">
             <div className="flex gap-[0.5%]">
                 <h2 className="font-light text-lg">{owner}</h2>
                 <p className="text-lg">/</p>
@@ -23,11 +23,10 @@ function RepositoryItem({fullName, description, starred, branches, link} : Repos
             <div>
                 <p className="text-[#989898] text-sm">{description}</p>
             </div>
-            <div className="flex">
+            <div className="flex mb-4">
                 <FaStar size={15}  /> <p className="ml-2 mr-5 text-sm">{starred}</p>
                 <FaCodeBranch size={15} /> <p className="ml-2 text-sm">{branches}</p>
             </div>
-            {/* <div className="lg:h-0 lg:w-0 lg:mb-0 lg:mt-0 h-[0.1px] w-[90%] mt-[5%] bg-gray-200"></div><br /> */}
          </a>
     )
 }
