@@ -22,7 +22,7 @@ function SearchBar (){
             <input  placeholder="Search Here" type="text" 
                     className="lg:border-b md:border-b lg:w-[26vw] lg:h-auto md:w-[58vw] md:h-auto
                                lg:ml-0 md:ml-0 w-[94vw] h-[7vh] focus:outline-none pl-[8%] pb-[1%] 
-                               border-gray-300
+                               border-gray-300 
                                lg:placeholder:text-gray-400 md:placeholder:text-gray-400
                                placeholder:text-gray-100 placeholder:text-[1.8vh] z-0"
                                onKeyDown={keyDown} 
