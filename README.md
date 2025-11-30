@@ -4,14 +4,14 @@ Basicamente é uma tela que traz informações de perfil e repositórios do GitH
 
 # Desafios Encontrados
 Durante o projeto, foram encontratos os seguintes desafios:
-- Como era um framework que não estava habituada, foi mais complicado de manipular as informações e pensar nos códigos;
-- Taiwind foi uma ferramenta nova pra mim, então tive um pouco de dificuldade para configurar no projeto;
-- O posicionamento dos itens na tela foi um pouquinho difícil no inicío por conta dos espaçamentos, responsividade, etc.;
-- Tive um pouco de dificuldade de integrar com a API do GitHub.
+- Como era um framework que não estava habituada, foi mais complicado de manipular as informações e pensar nos códigos. Conforme fui mexendo foi ficando mais fácil e simples;
+- Tailwind foi uma ferramenta nova pra mim, então tive um pouco de dificuldade para configurar. No entanto no decorrer do projeto me adaptei rapidamente à ferramenta por já ter conhecimento na aplicação de estilos utilizando CSS;
+- Ao integrar com a API do GitHub tive algumas dúvidas principalmente em como eu poderia manter o meu projeto coeso com as informações retornadas.
 
 # Pontos de Melhorias
-- Separar melhor os componentes
-- Refazer alguns códigos de uma forma mais mais otimizada
+- Adicionar uma forma do usuário alterar o perfil apresentado;
+- Separar os hooks que controlam os estados dos componentes;
+- Adicionar o tema escuro na aplicação. 
 
 # Instruções para Rodar o Projeto
 Para funcionar corretamente, precisa instalar o Node.js versão 22.20.0 ou superior e o npm ou yarn.
