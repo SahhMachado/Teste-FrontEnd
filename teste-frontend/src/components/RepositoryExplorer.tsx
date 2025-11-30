@@ -20,8 +20,8 @@ function RepositoryExplorer() {
     const currentList = active === "repos" ? repositories : starred
 
     const search = useStore((state) => state.search)
-    const type = useStore(state => state.type)
-    const language = useStore(state => state.language)
+    const filterType = useStore(state => state.type)
+    const filterLanguage = useStore(state => state.language)
 
     const filteredList = currentList
     .filter(repo =>
@@ -29,9 +29,9 @@ function RepositoryExplorer() {
     )
 
     .filter(repo => {
-        if (type.length === 0 || type.includes("all")) return true;
+        if (filterType.length === 0 || filterType.includes("all")) return true;
 
-        return type.some(type => {
+        return filterType.some(type => {
         if (type === "sources") return repo.fork === false;
         if (type === "forks") return repo.fork === true;
         if (type === "archived") return repo.archived === true;
@@ -41,10 +41,17 @@ function RepositoryExplorer() {
     })
 
     .filter(repo => {
-        if (language.length === 0 || language.includes("all")) return true;
+        if (filterLanguage.length === 0 || filterLanguage.includes("all")) {
+            return true;
+        }
 
-        return language[1].includes(repo.language?.toLowerCase());
-    });
+        if (!repo.language) return false;
+
+        return filterLanguage.some(languageSearch =>
+            languageSearch.includes(repo.language.toLowerCase())
+        )
+
+    })
 
     if (isLoading) return <p>Carregando dados...</p>
     if (error) return <p>Erro ao carregar dados.</p>
@@ -99,9 +106,9 @@ function RepositoryExplorer() {
             </div>
 
             {/* Filters + Search */}
-            <div className="w-full mt-[4%] flex flex-wrap gap-[5%] lg:ml-0 md:ml-0 ml-[3%]">
+            <div className="w-full mt-[4%] flex flex-wrap gap-[5%] lg:ml-0 md:ml-0 ml-[1%]">
                 
-                <div className="lg:ml-[45%] lg:mb-0 md:min-w-[50%] mb-[7%]">
+                <div className="lg:ml-[45%] lg:mb-0 md:min-w-[50%] mb-[4%]">
                     <FilterDropdown title="Type"  
                                     filterType="type"
                                     items={[
@@ -118,7 +125,7 @@ function RepositoryExplorer() {
                                     items={[
                                         { label: "All", value: "all" },
                                         { label: "Java", value: "java" },
-                                        { label: "TypeScript", value: "ts" },
+                                        { label: "TypeScript", value: "typescript" },
                                         { label: "HTML", value: "html" },
                                         { label: "CSS", value: "css" },
                                     ]}
@@ -136,7 +143,8 @@ function RepositoryExplorer() {
                         description: repo.description ?? "",
                         starred: repo.stargazers_count,
                         branches: repo.forks_count,
-                        link: repo.html_url
+                        link: repo.html_url,
+                        language: repo.language ?? ""
                     }))}
                 />
             </div>

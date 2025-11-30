@@ -9,8 +9,8 @@ type FilterItem = {
 
 type FilterDropdownProps = {
   title: string
-  filterType: "type" | "language"
   items: FilterItem[]
+  filterType: "type" | "language"
 }
 
 export function FilterDropdown({
