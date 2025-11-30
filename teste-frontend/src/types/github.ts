@@ -4,6 +4,10 @@ export type GithubRepo = {
   stargazers_count: number
   forks_count     : number
   html_url        : string
+  fork            : boolean
+  archived        : boolean
+  mirror_url      : null
+  language        : string
 }
 
 export type GithubPerfil = {
