@@ -1,30 +1,24 @@
-import { useEffect, useState } from "react"
+import { useQuery } from "@tanstack/react-query"
 import type { GithubRepo } from "../types/github"
 import { getRepositories, getStarredRepositories } from "../api/github"
 
 export function useGithubRepos(username: string) {
-  const [repositories, setRepositories] = useState<GithubRepo[]>([])
-  const [starred, setStarred] = useState<GithubRepo[]>([])
-  const [error, setError] = useState<string | null>(null)
+  const reposQuery = useQuery<GithubRepo[]>({
+    queryKey: ["github-repositories", username],
+    queryFn: () => getRepositories(username),
+    staleTime: 1000 * 60 * 5
+  })
 
-  useEffect(() => {
-    async function fetchRepos() {
-      try {
-        const [repos, starredRepos] = await Promise.all([
-          getRepositories(username),
-          getStarredRepositories(username)
-        ])
+  const starredQuery = useQuery<GithubRepo[]>({
+    queryKey: ["github-starred", username],
+    queryFn: () => getStarredRepositories(username),
+    staleTime: 1000 * 60 * 5
+  })
 
-        setRepositories(repos)
-        setStarred(starredRepos)
-
-      } catch (err) {
-        setError("Erro ao carregar dados")
-      }
-    }
-
-    fetchRepos()
-  }, [username])
-
-  return {repositories, starred, error}
+  return {
+    repositories: reposQuery.data ?? [],
+    starred: starredQuery.data ?? [],
+    isLoading: reposQuery.isLoading || starredQuery.isLoading,
+    error: reposQuery.error || starredQuery.error,
+  }
 }

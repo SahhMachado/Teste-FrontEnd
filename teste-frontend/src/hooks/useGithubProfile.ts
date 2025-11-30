@@ -1,23 +1,11 @@
-import { useEffect, useState } from "react"
+import { useQuery } from "@tanstack/react-query"
 import type { GithubPerfil } from "../types/github"
 import { getInfoPerfilUsuario } from "../api/github"
 
 export function useGithubProfile(username: string) {
-  const [perfil, setPerfil] = useState<GithubPerfil | null>(null)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    async function fetchPerfil() {
-      try {
-        const perfilData = await getInfoPerfilUsuario(username)
-        setPerfil(perfilData)
-      } catch {
-        setError("Erro ao carregar perfil")
-      }
-    }
-
-    fetchPerfil()
-  }, [username])
-
-  return { perfil, error }
+  return useQuery<GithubPerfil>({
+    queryKey: ["github-profile", username],
+    queryFn: () => getInfoPerfilUsuario(username),
+    staleTime: 1000 * 60 * 5
+  })
 }
