@@ -6,7 +6,10 @@ import { BsTwitterX } from "react-icons/bs";
 import { useGithubProfile } from "../hooks/useGithubProfile"
 
 function ProfileInfo() {
-    const { perfil } = useGithubProfile("SahhMachado")
+    const { data: perfil, isLoading, error } = useGithubProfile("SahhMachado")
+    if (isLoading) return <p>Carregando...</p>
+    if (error) return <p>Erro ao carregar perfil.</p>
+
     if (!perfil) return null // ou loader
     return(
         <div className="mb-[2%] text-[#0587FF] flex-wrap flex">

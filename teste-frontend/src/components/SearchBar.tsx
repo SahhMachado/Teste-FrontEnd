@@ -1,6 +1,16 @@
 import { LuSearch } from "react-icons/lu";
+import { useStore } from "../store/useStore"
 
 function SearchBar (){
+
+    const { setSearch } = useStore()
+    const keyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            setSearch(e.currentTarget.value); 
+        }
+    };
+
+
     return(
         <div className="h-[5%] lg:mb-[4%] mb-[8%] lg:mt-[-2vh] lg:bg-white 
                        md:bg-white md:mt-0 mt-[-7vh] bg-gray-100 relative">
@@ -14,7 +24,9 @@ function SearchBar (){
                                lg:ml-0 md:ml-0 w-[94vw] h-[7vh] focus:outline-none pl-[8%] pb-[1%] 
                                border-gray-300
                                lg:placeholder:text-gray-400 md:placeholder:text-gray-400
-                               placeholder:text-gray-100 placeholder:text-[1.8vh] z-0" />
+                               placeholder:text-gray-100 placeholder:text-[1.8vh] z-0"
+                               onKeyDown={keyDown} 
+                               />
         </div>
     )
 }

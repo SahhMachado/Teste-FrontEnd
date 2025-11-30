@@ -1,29 +1,69 @@
-import { useState } from "react"
+import { useStore } from "../store/useStore"
 import { FilterDropdown } from "./FilterDropdown"
 import RepositoryList from "./RepositoryList"
 import SearchBar from "./SearchBar"
-import { BiBookBookmark } from "react-icons/bi";
-import { FaRegStar } from "react-icons/fa";
+import { BiBookBookmark } from "react-icons/bi"
+import { FaRegStar } from "react-icons/fa"
 import { useGithubRepos } from "../hooks/useGithubRepositories"
 
 function RepositoryExplorer() { 
 
-    const {repositories, starred} = useGithubRepos("SahhMachado")
-    const [active, setActive] = useState<"repos" | "starred">("repos")
+    const { 
+        repositories, 
+        starred, 
+        isLoading, 
+        error 
+    } = useGithubRepos("SahhMachado")
+   
+    const active = useStore((state) => state.activeTab)
+    const setActive = useStore((state) => state.setActiveTab)
     const currentList = active === "repos" ? repositories : starred
 
-    return(
-         <div className="lg:w-[80%] md:w-[65%] w-[65%] h-[90%] ml-[1%]">
+    const search = useStore((state) => state.search)
+    const type = useStore(state => state.type)
+    const language = useStore(state => state.language)
+
+    const filteredList = currentList
+    .filter(repo =>
+        repo.full_name.toLowerCase().includes(search.toLowerCase())
+    )
+
+    .filter(repo => {
+        if (type.length === 0 || type.includes("all")) return true;
+
+        return type.some(type => {
+        if (type === "sources") return repo.fork === false;
+        if (type === "forks") return repo.fork === true;
+        if (type === "archived") return repo.archived === true;
+        if (type === "mirrors") return repo.mirror_url != null;
+        return true;
+        });
+    })
+
+    .filter(repo => {
+        if (language.length === 0 || language.includes("all")) return true;
+
+        return language[1].includes(repo.language?.toLowerCase());
+    });
+
+    if (isLoading) return <p>Carregando dados...</p>
+    if (error) return <p>Erro ao carregar dados.</p>
+
+    return (
+         <div className="lg:w-[80%] md:w-[60%] w-100 h-[90%] ml-[1%]">
+
+            {/* Header buttons */}
             <div className="flex justify-center lg:justify-start 
-                            md:justify-start gap-[10%] 
+                            md:justify-start md:gap-[8%] gap-[5%] 
                             md:min-w-[65%] min-w-screen">
-            {/* Repositories */}
+
+                {/* Repositories tab */}
                 <button
                     onClick={() => setActive("repos")}
-                    className={`relative lg:w-[15%] md:w-[35%] w-[45%] flex items-center gap-2 pb-3 text-sm font-medium transition
+                    className={`relative lg:w-[15%] md:w-[40%] w-[45%] flex items-center gap-2 pb-3 text-sm font-medium transition
                         ${active === "repos" ? "text-black" : "text-gray-500 hover:text-black"}
-                    `}>
-
+                    `}
+                >
                     <BiBookBookmark size={20} />
                     <span className="text-lg">Repositories</span>
 
@@ -33,33 +73,37 @@ function RepositoryExplorer() {
                     </span>
 
                     {active === "repos" && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[5%] bg-[#FD8C73]" />
+                        <span className="absolute bottom-0 left-0 right-0 h-[5%] bg-[#FD8C73]" />
                     )}
                 </button>
-                    
 
-                {/* Starred */}
+                {/* Starred tab */}
                 <button
                     onClick={() => setActive("starred")}
-                    className={`relative lg:w-[12%] md:w-[33%]  w-[40%] flex items-center gap-2 pb-3 text-sm font-medium transition
+                    className={`relative lg:w-[12%] md:w-[33%] w-[40%] flex items-center gap-2 pb-3 text-sm font-medium transition
                         ${active === "starred" ? "text-black" : "text-gray-500 hover:text-black"}
-                    `}>
-                        
+                    `}
+                >
                     <FaRegStar size={20} />
                     <span className="text-lg">Starred</span>
+
                     <span className="ml-1 rounded-full border border-gray-300 bg-gray-100 
                                      px-[9%] py-[0.5%] text-sm text-gray-400">
                         {starred.length}
                     </span>
 
                     {active === "starred" && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[5%] bg-[#FD8C73]" />
+                        <span className="absolute bottom-0 left-0 right-0 h-[5%] bg-[#FD8C73]" />
                     )}
                 </button>
             </div>
+
+            {/* Filters + Search */}
             <div className="w-full mt-[4%] flex flex-wrap gap-[5%] lg:ml-0 md:ml-0 ml-[3%]">
-                <div className="lg:ml-[50%] lg:mb-0 md:min-w-[50%] mb-[7%]">
+                
+                <div className="lg:ml-[45%] lg:mb-0 md:min-w-[50%] mb-[7%]">
                     <FilterDropdown title="Type"  
+                                    filterType="type"
                                     items={[
                                         { label: "All", value: "all" },
                                         { label: "Sources", value: "sources" },
@@ -70,6 +114,7 @@ function RepositoryExplorer() {
                     />
 
                     <FilterDropdown title="Language" 
+                                    filterType="language"
                                     items={[
                                         { label: "All", value: "all" },
                                         { label: "Java", value: "java" },
@@ -79,11 +124,14 @@ function RepositoryExplorer() {
                                     ]}
                     />
                 </div>
+
                 <SearchBar />
             </div>
+
+            {/* Repository list */}
             <div>
                 <RepositoryList
-                    repoItems={currentList.map(repo => ({
+                    repoItems={filteredList.map(repo => ({
                         fullName: repo.full_name,
                         description: repo.description ?? "",
                         starred: repo.stargazers_count,

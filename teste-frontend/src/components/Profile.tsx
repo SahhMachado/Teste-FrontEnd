@@ -4,7 +4,10 @@ import MoreProfileInfo from "./MoreProfileInfo"
 import ProfileInfo from "./ProfileInfo"
 
 function Profile() { 
-    const { perfil } = useGithubProfile("SahhMachado")
+    const { data: perfil, isLoading, error } = useGithubProfile("SahhMachado")
+    if (isLoading) return <p>Carregando...</p>;
+    if (error) return <p>Erro ao carregar perfil.</p>;
+
     if (!perfil) return null // ou loader
     return (
         <div className="lg:ml-[15%] lg:w-[15%] md:w-[30%] md:ml-[3%]">
