@@ -1,6 +1,6 @@
-import { create } from "zustand";
+import { create } from "zustand"
 
-type Tab = "repos" | "starred";
+type Tab = "repos" | "starred"
 
 export type RepoTypeFilter =
   | "all"
@@ -23,10 +23,10 @@ type useStoreProps = {
   activeTab: Tab;
   setActiveTab: (tab: Tab) => void;
 
-  type: RepoTypeFilter[];
+  type: RepoTypeFilter[]
   toggleRepoType: (type: RepoTypeFilter) => void;
 
-  language: LanguageFilter[];
+  language: LanguageFilter[]
   toggleLanguage: (lang: LanguageFilter) => void;
 };
 

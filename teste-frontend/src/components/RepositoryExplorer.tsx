@@ -29,20 +29,20 @@ function RepositoryExplorer() {
     )
 
     .filter(repo => {
-        if (filterType.length === 0 || filterType.includes("all")) return true;
+        if (filterType.length === 0 || filterType.includes("all")) return true
 
         return filterType.some(type => {
-        if (type === "sources") return repo.fork === false;
-        if (type === "forks") return repo.fork === true;
-        if (type === "archived") return repo.archived === true;
-        if (type === "mirrors") return repo.mirror_url != null;
-        return true;
-        });
+        if (type === "sources") return repo.fork === false
+        if (type === "forks") return repo.fork === true
+        if (type === "archived") return repo.archived === true
+        if (type === "mirrors") return repo.mirror_url != null
+        return true
+        })
     })
 
     .filter(repo => {
         if (filterLanguage.length === 0 || filterLanguage.includes("all")) {
-            return true;
+            return true
         }
 
         if (!repo.language) return false;

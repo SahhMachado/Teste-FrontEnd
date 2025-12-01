@@ -6,7 +6,7 @@ import ProfileInfo from "./ProfileInfo"
 function Profile() { 
     const { data: perfil, isLoading, error } = useGithubProfile("SahhMachado")
     if (isLoading) return <p>Carregando...</p>;
-    if (error) return <p>Erro ao carregar perfil.</p>;
+    if (error) return <p>Erro ao carregar perfil.</p>
 
     if (!perfil) return null // ou loader
     return (

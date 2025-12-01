@@ -18,17 +18,17 @@ export function FilterDropdown({
     filterType,
     items,
   }: FilterDropdownProps) {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false)
 
   const {
     type,
     language,
     toggleRepoType,
     toggleLanguage,
-  } = useStore();
+  } = useStore()
   
-  const selected = filterType === "type" ? type : language;
-  const toggle =  filterType === "type" ? toggleRepoType : toggleLanguage;
+  const selected = filterType === "type" ? type : language
+  const toggle =  filterType === "type" ? toggleRepoType : toggleLanguage
 
   return (
     <div className="relative inline-block z-10 lg:mt-0 md:mt-0 mt-[10%]">

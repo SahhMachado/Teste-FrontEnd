@@ -6,7 +6,7 @@ type MoreInfoProps = {
 };
 
 function MoreInfo({ conteudo }: MoreInfoProps) {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false)
 
     return (
         <div className="mb-[10%] flex justify-center flex-wrap">

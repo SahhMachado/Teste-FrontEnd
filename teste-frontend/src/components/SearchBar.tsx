@@ -1,4 +1,4 @@
-import { LuSearch } from "react-icons/lu";
+import { LuSearch } from "react-icons/lu"
 import { useStore } from "../store/useStore"
 
 function SearchBar (){
@@ -6,7 +6,7 @@ function SearchBar (){
     const { setSearch } = useStore()
     const keyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
-            setSearch(e.currentTarget.value); 
+            setSearch(e.currentTarget.value)
         }
     };
 

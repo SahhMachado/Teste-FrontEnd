@@ -1,5 +1,5 @@
-import { FaStar } from "react-icons/fa";
-import { GoGitBranch } from "react-icons/go";
+import { FaStar } from "react-icons/fa"
+import { GoGitBranch } from "react-icons/go"
 import { useStore } from "../store/useStore"
 
 export type RepositoryItemProps = {

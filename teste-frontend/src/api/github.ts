@@ -22,7 +22,7 @@ export async function getInfoPerfilUsuario(username: string) {
   const response = await fetch(`https://api.github.com/users/${username}`)
 
   if (!response.ok) {
-    throw new Error("Erro ao buscar repositórios favoritados")
+    throw new Error("Erro ao buscar os dados do usuário")
   }
 
   return response.json()
