@@ -71,7 +71,7 @@ function RepositoryExplorer() {
                         ${active === "repos" ? "text-black" : "text-gray-500 hover:text-black"}
                     `}
                 >
-                    <BiBookBookmark size={20} />
+                    <BiBookBookmark className="min-w-5 min-h-5" />
                     <span className="text-lg">Repositories</span>
 
                     <span className="ml-1 rounded-full border border-gray-300 bg-gray-100 
@@ -91,7 +91,7 @@ function RepositoryExplorer() {
                         ${active === "starred" ? "text-black" : "text-gray-500 hover:text-black"}
                     `}
                 >
-                    <FaRegStar size={20} />
+                    <FaRegStar className="min-w-5 min-h-5" />
                     <span className="text-lg">Starred</span>
 
                     <span className="ml-1 rounded-full border border-gray-300 bg-gray-100 
